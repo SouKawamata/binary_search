@@ -5,9 +5,20 @@ int k;
 int A[100000];
 
 int p(int m){
-  //部分列の要素の和の最大値がmとなるとき、分割された数がk個ならば1を返す
-  int i, j, split, sum, a;
-  if(sum < m)
+  //k人全員の仕事量がm以下で収まる
+  int sum = 0;
+  int rest = k-1;
+  for(int i = 0;i < n; i++){
+    if(A[i] > m) return 0;
+    if(A[i] + sum <= m){
+      sum += A[i];
+    }
+    else{
+      rest--;
+      sum = A[i];
+    }
+  }
+  return rest >= 0;
 }
 
 int main(){
